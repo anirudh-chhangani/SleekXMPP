@@ -39,7 +39,7 @@ class XEP_0096(BasePlugin):
         self.xmpp['xep_0095'].unregister_profile(File.namespace, self)
 
     def request_file_transfer(self, jid, sid=None, name=None, size=None,
-                                    desc=None, hash=None, date=None,
+                                    desc=None, file_hash=None, date=None,
                                     allow_ranged=False, mime_type=None,
                                     **iqargs):
         data = File()
@@ -47,6 +47,10 @@ class XEP_0096(BasePlugin):
         data['size'] = size
         data['date'] = date
         data['desc'] = desc
+
+        if file_hash is not None:
+            data['hash'] = file_hash
+
         if allow_ranged:
             data.enable('range')
 
